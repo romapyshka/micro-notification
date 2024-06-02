@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import axios from "axios";
+import { QueueService } from "./queue/queue.service";
 
 @Injectable()
 export class AppService {
-  sendNotification(username: string): string {
+  constructor(private readonly queueService: QueueService) {}
+  async sendNotification(username: string): Promise<string> {
     console.log("MASHARAG!")
     setTimeout(async () => {
       await axios.post('https://webhook.site/f6e50b78-c54d-4409-a910-13dca6241000', {
@@ -16,7 +18,10 @@ export class AppService {
           console.error(`Error while sending data to webhook: ${err}`)
         });
       // }, 24 * 60 * 60 * 1000);
-    }, 10000);
+    }, 5000);
+
+    console.log("Added job")
+    await this.queueService.addNotification(username);
     return `Notification was send to ${username}!`;
   }
 }
