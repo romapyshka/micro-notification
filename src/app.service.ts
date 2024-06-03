@@ -18,8 +18,7 @@ export class AppService {
         .catch((err) => {
           console.error(`Error while sending data to webhook by timeout: ${err}`);
         });
-      // }, 24 * 60 * 60 * 1000);
-    }, 5000);
+      }, 24 * 60 * 60 * 1000);
     console.log("Timeout set for notification");
 
     // This part of code use Bull.js library for queue operations
