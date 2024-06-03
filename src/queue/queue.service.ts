@@ -8,7 +8,7 @@ export class QueueService {
   }
 
   async addNotification(username: string) {
-    await this.queue.add('notification-job', username, {
+    await this.queue.add("notification-job", username, {
       // delay: 24 * 60 * 60 * 1000, // 24 години у мілісекундах
       delay: 10000, // 10 seconds
     });

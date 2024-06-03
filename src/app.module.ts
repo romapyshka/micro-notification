@@ -1,11 +1,16 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { QueueModule } from './queue/queue.module';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { QueueModule } from "./queue/queue.module";
 
 @Module({
-  imports: [QueueModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    QueueModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+}
